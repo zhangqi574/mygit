@@ -1,0 +1,7 @@
+# 使用数据库时代码自动创建的配置文件，从application.yml中可获取，不使用数据库时可删除该文件
+spring:
+  datasource:
+    driver: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/pledge_manager?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8&allowMultiQueries=true&useSSL=false
+    username: root
+    password: 123456

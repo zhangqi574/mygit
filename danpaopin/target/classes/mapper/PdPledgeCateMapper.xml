@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.yusys.yusp.repository.mapper.PdPledgeCateMapper">
+    <resultMap id="BaseResultMap" type="cn.com.yusys.yusp.domain.PdPledgeCate">
+		<id column="PLEDGE_CATE_ID" jdbcType="INTEGER" property="pledgeCateId" />
+		<result column="PLEDGE_CATE_CODE" jdbcType="VARCHAR" property="pledgeCateCode" />
+		<result column="PARENT_CODE" jdbcType="VARCHAR" property="parentCode" />
+		<result column="LVL_CODE" jdbcType="INTEGER" property="lvlCode" />
+		<result column="CATE_SHOW_NO" jdbcType="INTEGER" property="cateShowNo" />
+		<result column="CATE_VALID_FLAG" jdbcType="INTEGER" property="cateValidFlag" />
+		<result column="PLEDGE_CATE_NAME" jdbcType="VARCHAR" property="pledgeCateName" />
+		<result column="CATE_SEQ_NO" jdbcType="VARCHAR" property="cateSeqNo" />
+		<result column="PLEDGE_FLAG" jdbcType="INTEGER" property="pledgeFlag" />
+		<result column="PLEDGE_TYPE_ID" jdbcType="INTEGER" property="pledgeTypeId" />
+		<result column="PARENT_TYPE_NAME" jdbcType="VARCHAR" property="parentTypeName" />
+		<result column="CREATOR_ID" jdbcType="VARCHAR" property="creatorId" />
+		<result column="CREATE_ORG_ID" jdbcType="VARCHAR" property="createOrgId" />
+		<result column="CREATE_TIME" jdbcType="CHAR" property="createTime" />
+		<result column="RECENT_REVISER_ID" jdbcType="VARCHAR" property="recentReviserId" />
+		<result column="RECENT_REVISE_ORG_ID" jdbcType="VARCHAR" property="recentReviseOrgId" />
+		<result column="RECENT_REVISE_TIME" jdbcType="CHAR" property="recentReviseTime" />
+		<result column="HIGH_PLEDGE_RATE" jdbcType="DECIMAL" property="highPledgeRate" />
+		<result column="ASSESS_FREQ" jdbcType="VARCHAR" property="assessFreq" />
+		<result column="OVERDUE_CYCLE" jdbcType="DECIMAL" property="overdueCycle" />
+		<result column="OVERDUE_NUMS" jdbcType="DECIMAL" property="overdueNums" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        PLEDGE_CATE_ID,PLEDGE_CATE_CODE,PARENT_CODE,LVL_CODE,CATE_SHOW_NO,CATE_VALID_FLAG,PLEDGE_CATE_NAME,CATE_SEQ_NO,PLEDGE_FLAG,PLEDGE_TYPE_ID,PARENT_TYPE_NAME,CREATOR_ID,CREATE_ORG_ID,CREATE_TIME,RECENT_REVISER_ID,RECENT_REVISE_ORG_ID,RECENT_REVISE_TIME,HIGH_PLEDGE_RATE,ASSESS_FREQ,OVERDUE_CYCLE,OVERDUE_NUMS
+    </sql>
+
+    <!-- 根据主键查询 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from pd_pledge_cate
+        where 
+        PLEDGE_CATE_ID = #{pledgeCateId,jdbcType=INTEGER}
+    </select>
+    
+    <!-- 条件列表查询 -->
+    <select id="selectByModel" parameterType="cn.com.yusys.yusp.commons.mapper.QueryModel" resultMap="BaseResultMap">
+        select PLEDGE_CATE_ID,PLEDGE_CATE_CODE,PARENT_CODE,LVL_CODE,CATE_SHOW_NO,CATE_VALID_FLAG,PLEDGE_CATE_NAME,CATE_SEQ_NO,PLEDGE_FLAG,PLEDGE_TYPE_ID,PARENT_TYPE_NAME,CREATOR_ID,CREATE_ORG_ID,CREATE_TIME,RECENT_REVISER_ID,RECENT_REVISE_ORG_ID,RECENT_REVISE_TIME,HIGH_PLEDGE_RATE,ASSESS_FREQ,OVERDUE_CYCLE,OVERDUE_NUMS from pd_pledge_cate
+        <where>
+            <if test="condition.pledgeCateId != null">
+                <choose>
+                    <when test="@cn.com.yusys.yusp.commons.mapper.provider.OGNLUtil@like(condition.pledgeCateId)"> AND PLEDGE_CATE_ID like #{condition.pledgeCateId,jdbcType=INTEGER }</when>
+                    <otherwise> AND PLEDGE_CATE_ID = #{condition.pledgeCateId,jdbcType=INTEGER}</otherwise>
+                </choose>
+            </if>
+            <if test="condition.pledgeCateCode != null">
+                <choose>
+                    <when test="@cn.com.yusys.yusp.commons.mapper.provider.OGNLUtil@like(condition.pledgeCateCode)"> AND PLEDGE_CATE_CODE like #{condition.pledgeCateCode,jdbcType=VARCHAR }</when>
+                    <otherwise> AND PLEDGE_CATE_CODE = #{condition.pledgeCateCode,jdbcType=VARCHAR}</otherwise>
+                </choose>
+            </if>
+            <if test="condition.parentCode != null">
+                <choose>
+                    <when test="@cn.com.yusys.yusp.commons.mapper.provider.OGNLUtil@like(condition.parentCode)"> AND PARENT_CODE like #{condition.parentCode,jdbcType=VARCHAR }</when>
+                    <otherwise> AND PARENT_CODE = #{condition.parentCode,jdbcType=VARCHAR}</otherwise>
+                </choose>
+            </if>
+            <if test="condition.lvlCode != null">
+                <choose>
+                    <when test="@cn.com.yusys.yusp.commons.mapper.provider.OGNLUtil@like(condition.lvlCode)"> AND LVL_CODE like #{condition.lvlCode,jdbcType=INTEGER }</when>
+                    <otherwise> AND LVL_CODE = #{condition.lvlCode,jdbcType=INTEGER}</otherwise>
+                </choose>
+            </if>
+            <if test="condition.cateShowNo != null">
+                <choose>
+                    <when test="@cn.com.yusys.yusp.commons.mapper.provider.OGNLUtil@like(condition.cateShowNo)"> AND CATE_SHOW_NO like #{condition.cateShowNo,jdbcType=INTEGER }</when>
+                    <otherwise> AND CATE_SHOW_NO = #{condition.cateShowNo,jdbcType=INTEGER}</otherwise>
+                </choose>
+            </if>
+            <if test="condition.cateValidFlag != null">
+                <choose>
+                    <when test="@cn.com.yusys.yusp.commons.mapper.provider.OGNLUtil@like(condition.cateValidFlag)"> AND CATE_VALID_FLAG like #{condition.cateValidFlag,jdbcType=INTEGER }</when>
+                    <otherwise> AND CATE_VALID_FLAG = #{condition.cateValidFlag,jdbcType=INTEGER}</otherwise>
+                </choose>
+            </if>
+            <if test="condition.pledgeCateName != null">
+                <choose>
+                    <when test="@cn.com.yusys.yusp.commons.mapper.provider.OGNLUtil@like(condition.pledgeCateName)"> AND PLEDGE_CATE_NAME like #{condition.pledgeCateName,jdbcType=VARCHAR }</when>
+                    <otherwise> AND PLEDGE_CATE_NAME = #{condition.pledgeCateName,jdbcType=VARCHAR}</otherwise>
+                </choose>
+            </if>
+            <if test="condition.cateSeqNo != null">
+                <choose>
+                    <when test="@cn.com.yusys.yusp.commons.mapper.provider.OGNLUtil@like(condition.cateSeqNo)"> AND CATE_SEQ_NO like #{condition.cateSeqNo,jdbcType=VARCHAR }</when>
+                    <otherwise> AND CATE_SEQ_NO = #{condition.cateSeqNo,jdbcType=VARCHAR}</otherwise>
+                </choose>
+            </if>
+            <if test="condition.pledgeFlag != null">
+                <choose>
+                    <when test="@cn.com.yusys.yusp.commons.mapper.provider.OGNLUtil@like(condition.pledgeFlag)"> AND PLEDGE_FLAG like #{condition.pledgeFlag,jdbcType=INTEGER }</when>
+                    <otherwise> AND PLEDGE_FLAG = #{condition.pledgeFlag,jdbcType=INTEGER}</otherwise>
+                </choose>
+            </if>
+            <if test="condition.pledgeTypeId != null">
+                <choose>
+                    <when test="@cn.com.yusys.yusp.commons.mapper.provider.OGNLUtil@like(condition.pledgeTypeId)"> AND PLEDGE_TYPE_ID like #{condition.pledgeTypeId,jdbcType=INTEGER }</when>
+                    <otherwise> AND PLEDGE_TYPE_ID = #{condition.pledgeTypeId,jdbcType=INTEGER}</otherwise>
+                </choose>
+            </if>
+            <if test="condition.parentTypeName != null">
+                <choose>
+                    <when test="@cn.com.yusys.yusp.commons.mapper.provider.OGNLUtil@like(condition.parentTypeName)"> AND PARENT_TYPE_NAME like #{condition.parentTypeName,jdbcType=VARCHAR }</when>
+                    <otherwise> AND PARENT_TYPE_NAME = #{condition.parentTypeName,jdbcType=VARCHAR}</otherwise>
+                </choose>
+            </if>
+            <if test="condition.creatorId != null">
+                <choose>
+                    <when test="@cn.com.yusys.yusp.commons.mapper.provider.OGNLUtil@like(condition.creatorId)"> AND CREATOR_ID like #{condition.creatorId,jdbcType=VARCHAR }</when>
+                    <otherwise> AND CREATOR_ID = #{condition.creatorId,jdbcType=VARCHAR}</otherwise>
+                </choose>
+            </if>
+            <if test="condition.createOrgId != null">
+                <choose>
+                    <when test="@cn.com.yusys.yusp.commons.mapper.provider.OGNLUtil@like(condition.createOrgId)"> AND CREATE_ORG_ID like #{condition.createOrgId,jdbcType=VARCHAR }</when>
+                    <otherwise> AND CREATE_ORG_ID = #{condition.createOrgId,jdbcType=VARCHAR}</otherwise>
+                </choose>
+            </if>
+            <if test="condition.createTime != null">
+                <choose>
+                    <when test="@cn.com.yusys.yusp.commons.mapper.provider.OGNLUtil@like(condition.createTime)"> AND CREATE_TIME like #{condition.createTime,jdbcType=CHAR }</when>
+                    <otherwise> AND CREATE_TIME = #{condition.createTime,jdbcType=CHAR}</otherwise>
+                </choose>
+            </if>
+            <if test="condition.recentReviserId != null">
+                <choose>
+                    <when test="@cn.com.yusys.yusp.commons.mapper.provider.OGNLUtil@like(condition.recentReviserId)"> AND RECENT_REVISER_ID like #{condition.recentReviserId,jdbcType=VARCHAR }</when>
+                    <otherwise> AND RECENT_REVISER_ID = #{condition.recentReviserId,jdbcType=VARCHAR}</otherwise>
+                </choose>
+            </if>
+            <if test="condition.recentReviseOrgId != null">
+                <choose>
+                    <when test="@cn.com.yusys.yusp.commons.mapper.provider.OGNLUtil@like(condition.recentReviseOrgId)"> AND RECENT_REVISE_ORG_ID like #{condition.recentReviseOrgId,jdbcType=VARCHAR }</when>
+                    <otherwise> AND RECENT_REVISE_ORG_ID = #{condition.recentReviseOrgId,jdbcType=VARCHAR}</otherwise>
+                </choose>
+            </if>
+            <if test="condition.recentReviseTime != null">
+                <choose>
+                    <when test="@cn.com.yusys.yusp.commons.mapper.provider.OGNLUtil@like(condition.recentReviseTime)"> AND RECENT_REVISE_TIME like #{condition.recentReviseTime,jdbcType=CHAR }</when>
+                    <otherwise> AND RECENT_REVISE_TIME = #{condition.recentReviseTime,jdbcType=CHAR}</otherwise>
+                </choose>
+            </if>
+            <if test="condition.highPledgeRate != null">
+                <choose>
+                    <when test="@cn.com.yusys.yusp.commons.mapper.provider.OGNLUtil@like(condition.highPledgeRate)"> AND HIGH_PLEDGE_RATE like #{condition.highPledgeRate,jdbcType=DECIMAL }</when>
+                    <otherwise> AND HIGH_PLEDGE_RATE = #{condition.highPledgeRate,jdbcType=DECIMAL}</otherwise>
+                </choose>
+            </if>
+            <if test="condition.assessFreq != null">
+                <choose>
+                    <when test="@cn.com.yusys.yusp.commons.mapper.provider.OGNLUtil@like(condition.assessFreq)"> AND ASSESS_FREQ like #{condition.assessFreq,jdbcType=VARCHAR }</when>
+                    <otherwise> AND ASSESS_FREQ = #{condition.assessFreq,jdbcType=VARCHAR}</otherwise>
+                </choose>
+            </if>
+            <if test="condition.overdueCycle != null">
+                <choose>
+                    <when test="@cn.com.yusys.yusp.commons.mapper.provider.OGNLUtil@like(condition.overdueCycle)"> AND OVERDUE_CYCLE like #{condition.overdueCycle,jdbcType=DECIMAL }</when>
+                    <otherwise> AND OVERDUE_CYCLE = #{condition.overdueCycle,jdbcType=DECIMAL}</otherwise>
+                </choose>
+            </if>
+            <if test="condition.overdueNums != null">
+                <choose>
+                    <when test="@cn.com.yusys.yusp.commons.mapper.provider.OGNLUtil@like(condition.overdueNums)"> AND OVERDUE_NUMS like #{condition.overdueNums,jdbcType=DECIMAL }</when>
+                    <otherwise> AND OVERDUE_NUMS = #{condition.overdueNums,jdbcType=DECIMAL}</otherwise>
+                </choose>
+            </if>
+            ${dataAuth}
+        </where>
+        <if test="sort != null"> order by ${sort} </if>
+    </select>
+	
+    <!-- 插入 -->
+    <insert id="insert" parameterType="cn.com.yusys.yusp.domain.PdPledgeCate">
+        insert into pd_pledge_cate (PLEDGE_CATE_ID,PLEDGE_CATE_CODE,PARENT_CODE,LVL_CODE,CATE_SHOW_NO,CATE_VALID_FLAG,PLEDGE_CATE_NAME,CATE_SEQ_NO,PLEDGE_FLAG,PLEDGE_TYPE_ID,PARENT_TYPE_NAME,CREATOR_ID,CREATE_ORG_ID,CREATE_TIME,RECENT_REVISER_ID,RECENT_REVISE_ORG_ID,RECENT_REVISE_TIME,HIGH_PLEDGE_RATE,ASSESS_FREQ,OVERDUE_CYCLE,OVERDUE_NUMS)
+        values (
+        #{pledgeCateId,jdbcType=INTEGER},
+        #{pledgeCateCode,jdbcType=VARCHAR},
+        #{parentCode,jdbcType=VARCHAR},
+        #{lvlCode,jdbcType=INTEGER},
+        #{cateShowNo,jdbcType=INTEGER},
+        #{cateValidFlag,jdbcType=INTEGER},
+        #{pledgeCateName,jdbcType=VARCHAR},
+        #{cateSeqNo,jdbcType=VARCHAR},
+        #{pledgeFlag,jdbcType=INTEGER},
+        #{pledgeTypeId,jdbcType=INTEGER},
+        #{parentTypeName,jdbcType=VARCHAR},
+        #{creatorId,jdbcType=VARCHAR},
+        #{createOrgId,jdbcType=VARCHAR},
+        #{createTime,jdbcType=CHAR},
+        #{recentReviserId,jdbcType=VARCHAR},
+        #{recentReviseOrgId,jdbcType=VARCHAR},
+        #{recentReviseTime,jdbcType=CHAR},
+        #{highPledgeRate,jdbcType=DECIMAL},
+        #{assessFreq,jdbcType=VARCHAR},
+        #{overdueCycle,jdbcType=DECIMAL},
+        #{overdueNums,jdbcType=DECIMAL}
+        )
+    </insert>
+
+    <!-- 插入-只插入非空字段 -->
+    <insert id="insertSelective" parameterType="cn.com.yusys.yusp.domain.PdPledgeCate">
+		insert into pd_pledge_cate
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pledgeCateId != null">
+                PLEDGE_CATE_ID,
+            </if>        
+            <if test="pledgeCateCode != null">
+                PLEDGE_CATE_CODE,
+            </if>        
+            <if test="parentCode != null">
+                PARENT_CODE,
+            </if>        
+            <if test="lvlCode != null">
+                LVL_CODE,
+            </if>        
+            <if test="cateShowNo != null">
+                CATE_SHOW_NO,
+            </if>        
+            <if test="cateValidFlag != null">
+                CATE_VALID_FLAG,
+            </if>        
+            <if test="pledgeCateName != null">
+                PLEDGE_CATE_NAME,
+            </if>        
+            <if test="cateSeqNo != null">
+                CATE_SEQ_NO,
+            </if>        
+            <if test="pledgeFlag != null">
+                PLEDGE_FLAG,
+            </if>        
+            <if test="pledgeTypeId != null">
+                PLEDGE_TYPE_ID,
+            </if>        
+            <if test="parentTypeName != null">
+                PARENT_TYPE_NAME,
+            </if>        
+            <if test="creatorId != null">
+                CREATOR_ID,
+            </if>        
+            <if test="createOrgId != null">
+                CREATE_ORG_ID,
+            </if>        
+            <if test="createTime != null">
+                CREATE_TIME,
+            </if>        
+            <if test="recentReviserId != null">
+                RECENT_REVISER_ID,
+            </if>        
+            <if test="recentReviseOrgId != null">
+                RECENT_REVISE_ORG_ID,
+            </if>        
+            <if test="recentReviseTime != null">
+                RECENT_REVISE_TIME,
+            </if>        
+            <if test="highPledgeRate != null">
+                HIGH_PLEDGE_RATE,
+            </if>        
+            <if test="assessFreq != null">
+                ASSESS_FREQ,
+            </if>        
+            <if test="overdueCycle != null">
+                OVERDUE_CYCLE,
+            </if>        
+            <if test="overdueNums != null">
+                OVERDUE_NUMS,
+            </if>        
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pledgeCateId != null">
+                #{pledgeCateId,jdbcType=INTEGER},
+            </if>                   
+            <if test="pledgeCateCode != null">
+                #{pledgeCateCode,jdbcType=VARCHAR},
+            </if>                   
+            <if test="parentCode != null">
+                #{parentCode,jdbcType=VARCHAR},
+            </if>                   
+            <if test="lvlCode != null">
+                #{lvlCode,jdbcType=INTEGER},
+            </if>                   
+            <if test="cateShowNo != null">
+                #{cateShowNo,jdbcType=INTEGER},
+            </if>                   
+            <if test="cateValidFlag != null">
+                #{cateValidFlag,jdbcType=INTEGER},
+            </if>                   
+            <if test="pledgeCateName != null">
+                #{pledgeCateName,jdbcType=VARCHAR},
+            </if>                   
+            <if test="cateSeqNo != null">
+                #{cateSeqNo,jdbcType=VARCHAR},
+            </if>                   
+            <if test="pledgeFlag != null">
+                #{pledgeFlag,jdbcType=INTEGER},
+            </if>                   
+            <if test="pledgeTypeId != null">
+                #{pledgeTypeId,jdbcType=INTEGER},
+            </if>                   
+            <if test="parentTypeName != null">
+                #{parentTypeName,jdbcType=VARCHAR},
+            </if>                   
+            <if test="creatorId != null">
+                #{creatorId,jdbcType=VARCHAR},
+            </if>                   
+            <if test="createOrgId != null">
+                #{createOrgId,jdbcType=VARCHAR},
+            </if>                   
+            <if test="createTime != null">
+                #{createTime,jdbcType=CHAR},
+            </if>                   
+            <if test="recentReviserId != null">
+                #{recentReviserId,jdbcType=VARCHAR},
+            </if>                   
+            <if test="recentReviseOrgId != null">
+                #{recentReviseOrgId,jdbcType=VARCHAR},
+            </if>                   
+            <if test="recentReviseTime != null">
+                #{recentReviseTime,jdbcType=CHAR},
+            </if>                   
+            <if test="highPledgeRate != null">
+                #{highPledgeRate,jdbcType=DECIMAL},
+            </if>                   
+            <if test="assessFreq != null">
+                #{assessFreq,jdbcType=VARCHAR},
+            </if>                   
+            <if test="overdueCycle != null">
+                #{overdueCycle,jdbcType=DECIMAL},
+            </if>                   
+            <if test="overdueNums != null">
+                #{overdueNums,jdbcType=DECIMAL},
+            </if>                   
+        </trim>
+    </insert>
+
+    <!-- 根据主键更新 -->
+    <update id="updateByPrimaryKey" parameterType="cn.com.yusys.yusp.domain.PdPledgeCate">
+        update pd_pledge_cate set 
+        PLEDGE_CATE_ID = #{pledgeCateId,jdbcType=INTEGER},
+        PLEDGE_CATE_CODE = #{pledgeCateCode,jdbcType=VARCHAR},
+        PARENT_CODE = #{parentCode,jdbcType=VARCHAR},
+        LVL_CODE = #{lvlCode,jdbcType=INTEGER},
+        CATE_SHOW_NO = #{cateShowNo,jdbcType=INTEGER},
+        CATE_VALID_FLAG = #{cateValidFlag,jdbcType=INTEGER},
+        PLEDGE_CATE_NAME = #{pledgeCateName,jdbcType=VARCHAR},
+        CATE_SEQ_NO = #{cateSeqNo,jdbcType=VARCHAR},
+        PLEDGE_FLAG = #{pledgeFlag,jdbcType=INTEGER},
+        PLEDGE_TYPE_ID = #{pledgeTypeId,jdbcType=INTEGER},
+        PARENT_TYPE_NAME = #{parentTypeName,jdbcType=VARCHAR},
+        CREATOR_ID = #{creatorId,jdbcType=VARCHAR},
+        CREATE_ORG_ID = #{createOrgId,jdbcType=VARCHAR},
+        CREATE_TIME = #{createTime,jdbcType=CHAR},
+        RECENT_REVISER_ID = #{recentReviserId,jdbcType=VARCHAR},
+        RECENT_REVISE_ORG_ID = #{recentReviseOrgId,jdbcType=VARCHAR},
+        RECENT_REVISE_TIME = #{recentReviseTime,jdbcType=CHAR},
+        HIGH_PLEDGE_RATE = #{highPledgeRate,jdbcType=DECIMAL},
+        ASSESS_FREQ = #{assessFreq,jdbcType=VARCHAR},
+        OVERDUE_CYCLE = #{overdueCycle,jdbcType=DECIMAL},
+        OVERDUE_NUMS = #{overdueNums,jdbcType=DECIMAL}
+        where 
+        PLEDGE_CATE_ID = #{pledgeCateId,jdbcType=INTEGER}
+    </update>
+
+    <!-- 根据主键更新-只更新非空字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="cn.com.yusys.yusp.domain.PdPledgeCate">
+        update pd_pledge_cate
+        <set>
+            <if test="pledgeCateId != null">
+                PLEDGE_CATE_ID = #{pledgeCateId,jdbcType=INTEGER},
+            </if>        
+            <if test="pledgeCateCode != null">
+                PLEDGE_CATE_CODE = #{pledgeCateCode,jdbcType=VARCHAR},
+            </if>        
+            <if test="parentCode != null">
+                PARENT_CODE = #{parentCode,jdbcType=VARCHAR},
+            </if>        
+            <if test="lvlCode != null">
+                LVL_CODE = #{lvlCode,jdbcType=INTEGER},
+            </if>        
+            <if test="cateShowNo != null">
+                CATE_SHOW_NO = #{cateShowNo,jdbcType=INTEGER},
+            </if>        
+            <if test="cateValidFlag != null">
+                CATE_VALID_FLAG = #{cateValidFlag,jdbcType=INTEGER},
+            </if>        
+            <if test="pledgeCateName != null">
+                PLEDGE_CATE_NAME = #{pledgeCateName,jdbcType=VARCHAR},
+            </if>        
+            <if test="cateSeqNo != null">
+                CATE_SEQ_NO = #{cateSeqNo,jdbcType=VARCHAR},
+            </if>        
+            <if test="pledgeFlag != null">
+                PLEDGE_FLAG = #{pledgeFlag,jdbcType=INTEGER},
+            </if>        
+            <if test="pledgeTypeId != null">
+                PLEDGE_TYPE_ID = #{pledgeTypeId,jdbcType=INTEGER},
+            </if>        
+            <if test="parentTypeName != null">
+                PARENT_TYPE_NAME = #{parentTypeName,jdbcType=VARCHAR},
+            </if>        
+            <if test="creatorId != null">
+                CREATOR_ID = #{creatorId,jdbcType=VARCHAR},
+            </if>        
+            <if test="createOrgId != null">
+                CREATE_ORG_ID = #{createOrgId,jdbcType=VARCHAR},
+            </if>        
+            <if test="createTime != null">
+                CREATE_TIME = #{createTime,jdbcType=CHAR},
+            </if>        
+            <if test="recentReviserId != null">
+                RECENT_REVISER_ID = #{recentReviserId,jdbcType=VARCHAR},
+            </if>        
+            <if test="recentReviseOrgId != null">
+                RECENT_REVISE_ORG_ID = #{recentReviseOrgId,jdbcType=VARCHAR},
+            </if>        
+            <if test="recentReviseTime != null">
+                RECENT_REVISE_TIME = #{recentReviseTime,jdbcType=CHAR},
+            </if>        
+            <if test="highPledgeRate != null">
+                HIGH_PLEDGE_RATE = #{highPledgeRate,jdbcType=DECIMAL},
+            </if>        
+            <if test="assessFreq != null">
+                ASSESS_FREQ = #{assessFreq,jdbcType=VARCHAR},
+            </if>        
+            <if test="overdueCycle != null">
+                OVERDUE_CYCLE = #{overdueCycle,jdbcType=DECIMAL},
+            </if>        
+            <if test="overdueNums != null">
+                OVERDUE_NUMS = #{overdueNums,jdbcType=DECIMAL}
+            </if>        
+        </set>
+        where
+        PLEDGE_CATE_ID = #{pledgeCateId,jdbcType=INTEGER}
+    </update>
+
+    <!-- 根据主键删除 -->
+    <delete id="deleteByPrimaryKey">
+        delete from pd_pledge_cate where  
+        PLEDGE_CATE_ID = #{pledgeCateId,jdbcType=INTEGER}
+    </delete>
+
+    <!-- 根据多个主键删除 -->
+    <delete id="deleteByIds" parameterType="java.lang.String">
+        delete from pd_pledge_cate where  PLEDGE_CATE_ID in
+        <foreach collection="@cn.com.yusys.yusp.commons.mapper.provider.OGNLUtil@toList('java.lang.String',ids)" open="(" close=")" separator="," item="pledgeCateId">
+          #{pledgeCateId,jdbcType=INTEGER}
+        </foreach>
+        <if test="_parameter.containsKey('dataAuth')">${dataAuth}</if>
+    </delete>
+</mapper>
